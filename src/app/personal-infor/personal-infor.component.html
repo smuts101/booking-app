@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+  <div class="col-md-4 register-employee">
+    <!-- form card register -->
+    <div class="card-body">
+      <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input class="form-control" type="text" formControlName="name" [ngClass]="{'is-invalid':submitted && f.name.errors}">
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Last name is Required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputName">Surname</label>
+          <input class="form-control" type="text" formControlName="surname" [ngClass]="{'is-invalid':submitted && f.surname.errors}">
+          <div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+              <div *ngIf="f.surname.errors.required">Surname is required</div>
+          </div>
+        </div>
+          <div class="form-group">
+    <label for="exampleFormControlSelect1">Gender</label>
+    <select formControlName="gender" class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid':submitted  && f.gender.errors}">
+      <option>Male</option>
+      <option>Female</option>
+    </select>
+          <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                        <div *ngIf="f.gender.errors.required">Gender is required</div>
+                    </div>
+  </div>
+     <div class="form-group">
+          <label for="inputName">ID Number</label>
+          <input class="form-control" type="number" formControlName="id" [ngClass]="{'is-invalid':submitted  && f.id.errors}">
+              <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+                        <div *ngIf="f.id.errors.required">ID must be numbers only</div>
+                             <div *ngIf="f.id.errors.minlength">ID must be at least 13 characters</div>
+                
+                    </div>
+        </div>
+
+
+  <div class="form-group">
+          <button class="btn btn-success btn-lg btn-block" type="submit">Register</button>
+        </div>
+        
+      </form>
+
+    </div>
+  </div><!-- form card register -->
+</div>

@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+  <div class="col-md-4 register-employee">
+    <!-- form card register -->
+
+
+
+    <div class="card-body">
+      <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    
+   <div class="form-group">
+    <label for="exampleFormControlSelect1">Bank Name</label>
+    <select formControlName="bank" class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid':submitted  && f.bank.errors}">
+      <option>Absa</option>
+      <option>Capitec</option>
+      <option>Standard bank</option>
+      <option>FNB</option>
+    </select>
+        <div *ngIf="submitted && f.bank.errors" class="invalid-feedback">
+                        <div *ngIf="f.bank.errors.required">bank is required</div>
+                    </div>
+  </div>
+    
+        <div class="form-group">
+          <label for="inputName">Card Number</label>
+          <input class="form-control" type="number" formControlName="cardno" [ngClass]="{'is-invalid':submitted  && f.cardno.errors}">
+               <div *ngIf="submitted && f.cardno.errors" class="invalid-feedback">
+                        <div *ngIf="f.cardno.errors.required">cardno is required</div>
+                        
+                        <div *ngIf="f.cardno.errors.minLength">min length 8</div>
+                    </div>
+
+                    
+        </div>
+
+
+          <div class="form-group">
+          <label for="inputName">Valid Thru</label>
+          <input class="form-control" placeholder="month/year" type="text" formControlName="validDate" [ngClass]="{'is-invalid':submitted  && f.validDate.errors}">
+                  <div *ngIf="submitted && f.validDate.errors" class="invalid-feedback">
+                        <div *ngIf="f.validDate.errors.required">date is required</div>
+                    </div>
+        </div>
+
+
+
+        <div class="form-group">
+          <label for="inputName">Account Holder</label>
+          <input class="form-control" placeholder="" type="text" formControlName="holder" [ngClass]="{'is-invalid':submitted  && f.holder.errors}">
+          <div *ngIf="submitted && f.holder.errors" class="invalid-feedback">
+                        <div *ngIf="f.holder.errors.required">holder is required</div>
+                    </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="inputName">VCC</label>
+          <input class="form-control" placeholder="" type="number" formControlName="vcc" [ngClass]="{'is-invalid':submitted  && f.vcc.errors}">
+              <div *ngIf="submitted && f.vcc.errors" class="invalid-feedback">
+                        <div *ngIf="f.vcc.errors.required">vcc is required</div>
+                        <div *ngIf="f.vcc.errors.minLength">max is 3</div>
+                    </div>
+        </div>
+   
+
+  <div class="form-group">
+          <button class="btn btn-success btn-lg btn-block" type="submit">Pay</button>
+        </div>
+        
+      </form>
+
+    </div>
+  </div><!-- form card register -->
+</div>
