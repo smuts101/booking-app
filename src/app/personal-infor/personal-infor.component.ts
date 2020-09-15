@@ -1,8 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 //import { ServiceService } from './service.service';
 import { ServiceScriptService } from '../service-script.service';
+import { datesValidation } from '../dates.validator';
 
 @Component({
   selector: 'app-personal-infor',
@@ -21,11 +22,23 @@ export class PersonalInforComponent implements OnInit {
                   }
  mainForm() {
     this.detailsForm = this.fb.group({
-      name: ['',Validators.required],
-      surname:['',Validators.required],
-      gender:['',Validators.required],
-      id:['',[Validators.required, Validators.minLength(13)]]
-    })
+      name:new FormControl ('',[Validators.required, Validators.minLength(2)]),
+      surname:new FormControl ('',[Validators.required,Validators.minLength(2)]),
+      gender:new FormControl ('',[Validators.required]),
+      id:new FormControl ('',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{13}$")]),
+       dayChckin: new FormControl('',[Validators.required]),
+    monthChckin: new FormControl('',[Validators.required]),
+    yearChckin: new FormControl('',[Validators.required]),
+    dayChckout: new FormControl('',[Validators.required]),
+    monthChckout: new FormControl('',[Validators.required]),
+    yearChckout: new FormControl('',[Validators.required])
+    },
+   { 
+    
+      validator: datesValidation("dayChckin","monthChckin","yearChckin","yearChckout","monthChckout","dayChckout")
+      
+
+   })
   }
 
 get f(){

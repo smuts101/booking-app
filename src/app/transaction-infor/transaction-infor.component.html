@@ -9,61 +9,118 @@
     
    <div class="form-group">
     <label for="exampleFormControlSelect1">Bank Name</label>
-    <select formControlName="bank" class="form-control" id="exampleFormControlSelect1" [ngClass]="{'is-invalid':submitted  && f.bank.errors}">
+    <select formControlName="bank" class="form-control" id="exampleFormControlSelect1" >
       <option>Absa</option>
       <option>Capitec</option>
       <option>Standard bank</option>
       <option>FNB</option>
     </select>
-        <div *ngIf="submitted && f.bank.errors" class="invalid-feedback">
-                        <div *ngIf="f.bank.errors.required">bank is required</div>
-                    </div>
+         <div *ngIf="f.bank.touched && f.bank.invalid" class="alert alert-danger">
+            <div *ngIf="f.bank.errors.required">Bank is required.</div>
+        </div>
   </div>
     
         <div class="form-group">
           <label for="inputName">Card Number</label>
-          <input class="form-control" type="number" formControlName="cardno" [ngClass]="{'is-invalid':submitted  && f.cardno.errors}">
-               <div *ngIf="submitted && f.cardno.errors" class="invalid-feedback">
-                        <div *ngIf="f.cardno.errors.required">cardno is required</div>
-                        
-                        <div *ngIf="f.cardno.errors.minLength">min length 8</div>
-                    </div>
-
-                    
+          <input class="form-control" type="number" formControlName="cardno" >
+          <div *ngIf="f.cardno.touched && f.cardno.invalid" class="alert alert-danger">
+            <div *ngIf="f.cardno.errors.required">cardno is required.</div>
+            <div *ngIf="f.cardno.errors.minLength">cardno cannot be latter character.</div>
+        </div>
         </div>
 
 
           <div class="form-group">
           <label for="inputName">Valid Thru</label>
-          <input class="form-control" placeholder="month/year" type="text" formControlName="validDate" [ngClass]="{'is-invalid':submitted  && f.validDate.errors}">
-                  <div *ngIf="submitted && f.validDate.errors" class="invalid-feedback">
-                        <div *ngIf="f.validDate.errors.required">date is required</div>
-                    </div>
+          <input class="form-control" placeholder="month/year" type="text" formControlName="validDate" >
+             <div *ngIf="f.validDate.touched && f.validDate.invalid" class="alert alert-danger">
+            <div *ngIf="f.validDate.errors.required">validDate is required.</div>
         </div>
+        </div>
+
+  <div class="form-row">
+      <label for="confirm_password">Checkin</label>
+
+    <div class="col">
+      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
+  <select formControlName="validMonth" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+    <option selected>Month...</option>
+    <option >1</option>
+    <option >2</option>
+    <option >3</option>
+    <option >4</option>
+    <option >5</option>
+    <option >6</option>
+    <option >7</option>
+    <option >8</option>
+    <option >9</option>
+    <option >10</option>
+    <option >11</option>
+    <option >12</option>
+   
+  </select>
+     <div *ngIf="f.validMonth.touched && f.validMonth.invalid" class="alert alert-danger">
+                <div *ngIf="f.validMonth.errors.required">Password is required.</div>
+                <div *ngIf="f.validMonth.errors.cardExpired">Your bank card has expired.</div>
+            </div>
+    </div>
+    <div class="col">
+     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
+  <select formControlName="validYear" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+    <option selected>Year...</option>
+    <option >2019</option>
+    <option >2020</option>
+    <option >2021</option>
+    <option >2022</option>
+    <option >2023</option>
+    <option >2024</option>
+  </select>
+  <div *ngIf="f.validYear.touched && f.validYear.invalid" class="alert alert-danger">
+                <div *ngIf="f.validYear.errors.required">Password is required.</div>
+                <div *ngIf="f.validYear.errors.cardExpired">Your bank card has expired.</div>
+            </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
         <div class="form-group">
           <label for="inputName">Account Holder</label>
-          <input class="form-control" placeholder="" type="text" formControlName="holder" [ngClass]="{'is-invalid':submitted  && f.holder.errors}">
-          <div *ngIf="submitted && f.holder.errors" class="invalid-feedback">
-                        <div *ngIf="f.holder.errors.required">holder is required</div>
-                    </div>
+          <input class="form-control" placeholder="" type="text" formControlName="holder" >
+           <div *ngIf="f.holder.touched && f.holder.invalid" class="alert alert-danger">
+            <div *ngIf="f.holder.errors.required">holder is required.</div>
+        </div>
         </div>
 
 
         <div class="form-group">
           <label for="inputName">VCC</label>
-          <input class="form-control" placeholder="" type="number" formControlName="vcc" [ngClass]="{'is-invalid':submitted  && f.vcc.errors}">
-              <div *ngIf="submitted && f.vcc.errors" class="invalid-feedback">
-                        <div *ngIf="f.vcc.errors.required">vcc is required</div>
-                        <div *ngIf="f.vcc.errors.minLength">max is 3</div>
-                    </div>
+          <input class="form-control" placeholder="" type="number" formControlName="vcc" >
+           <div *ngIf="f.vcc.touched && f.vcc.invalid" class="alert alert-danger">
+            <div *ngIf="f.vcc.errors.required">vcc is required.</div>
+            <div *ngIf="f.vcc.errors.minLength">vcc is min length.</div>
+         </div>
         </div>
    
 
   <div class="form-group">
-          <button class="btn btn-success btn-lg btn-block" type="submit">Pay</button>
+          <button [disabled] = "!transactionForm.valid"  class="btn btn-success btn-lg btn-block" type="submit">Pay</button>
         </div>
         
       </form>

@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormControl,FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ServiceScriptService } from '../service-script.service';
+import { cardDateValidation} from '../dates.validator';
 
 @Component({
   selector: 'app-transaction-infor',
@@ -20,13 +21,20 @@ export class TransactionInforComponent implements OnInit {
                   }
  mainForm() {
     this.transactionForm = this.fb.group({
-      cardno: ['',[Validators.required, Validators.minLength(8)]],
-      bank:['',Validators.required],
-      holder:['',Validators.required],
-      vcc:['',[Validators.required,Validators.minLength(3)]],
-      validDate:['',[Validators.required]]
-     
-    })
+      cardno:new FormControl( '',[Validators.required,  Validators.pattern("^((\\+91-?)|0)?[0-9]{16}$")]),
+      bank:new FormControl('',[Validators.required]),
+      holder:new FormControl('',[Validators.required,Validators.minLength(2)]),
+      vcc:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{3}$")]),
+      validDate:new FormControl('',[Validators.required]),
+      validMonth:new FormControl('',[Validators.required]),
+      validYear:new FormControl('',[Validators.required])
+    },
+   { 
+    
+      validator: cardDateValidation("validMonth","validYear")
+      
+
+   })
   }
   get f(){
   return this.transactionForm.controls;
